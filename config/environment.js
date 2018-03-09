@@ -10,6 +10,7 @@ module.exports = function(environment) {
     environment,
     rootURL: '/',
     locationType: 'auto',
+    socketLocation: 'http://localhost:8080',
     moment: {
       // Options:
       // 'all' - all years, all timezones
@@ -58,7 +59,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-
+    ENV.socketLocation = 'http://localhost:8080';
   }
 
   return ENV;

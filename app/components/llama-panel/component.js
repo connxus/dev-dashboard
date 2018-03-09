@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import config from 'dev-dashboard/config/environment';
 
 export default Ember.Component.extend({
 	socketIOService: Ember.inject.service('socket-io'),
@@ -9,7 +10,7 @@ export default Ember.Component.extend({
   didInsertElement: function() {
 		this._super(...arguments);
 
-		const socket = this.get('socketIOService').socketFor('http://localhost:8080');
+		const socket = this.get('socketIOService').socketFor(config.socketLocation);
     this.set('socket', socket);
 
 		socket.on('llama stream', this.onLlamaStream, this);
