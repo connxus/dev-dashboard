@@ -1,36 +1,47 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+	socketIOService: Ember.inject.service('socket-io'),
 
-  firstStream: true,
-  secondStream: false,
-  thirdStream: false,
+  stream: 1,
+  totalSteams: 3,
 
   didInsertElement: function() {
-    this.send('changeStream');
+		this._super(...arguments);
+
+		const socket = this.get('socketIOService').socketFor('http://localhost:8080');
+    this.set('socket', socket);
+
+		socket.on('llama stream', this.onLlamaStream, this);
+  },
+
+  onLlamaStream({ streamNumber }) {
+    this.set('stream', parseInt(streamNumber));
   },
 
   actions: {
-    changeStream: function() {
-      var self = this;
-      var firstStream = this.get('firstStream');
-      var secondStream = this.get('secondStream');
-      var thirdStream = this.get('thirdStream');
 
-      if (firstStream) {
-        this.set('firstStream', false);
-        this.set('secondStream', true);
-      } else if (secondStream) {
-        this.set('secondStream', false);
-        this.set('thirdStream', true);
-      } else if (thirdStream) {
-        this.set('thirdStream', false);
-        this.set('firstStream', true);
+    nextStream() {
+      const stream = this.get('stream');
+      const totalStreams = this.get('totalSteams');
+
+      if ( stream >= totalStreams ) {
+        this.set('stream', 1);
+      } else {
+        this.set('stream', stream + 1);
       }
+    },
 
-      Ember.run.later(function() {
-        self.send('changeStream');
-      }, 5000)
+    prevStream() {
+      const stream = this.get('stream');
+      const totalStreams = this.get('totalSteams');
+
+      if ( stream <= 1 ) {
+        this.set('stream', totalStreams );
+      } else {
+        this.set('stream', stream - 1);
+      }
     }
+
   }
 });

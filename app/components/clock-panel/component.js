@@ -3,8 +3,6 @@ import moment from 'moment';
 
 
 export default Ember.Component.extend({
-  socketIOService: Ember.inject.service('socket-io'),
-
   namespace: '/',
 
   // didInsertElement() {

@@ -1,0 +1,13 @@
+<h3>Server Messages</h3>
+{{#if messages}}
+	<ul>
+		{{#each messages as |message|}}
+			<li>{{message}}</li>
+		{{/each}}
+	</ul>
+{{/if}}
+
+<div class="field">
+	{{input type="text" value=streamNumber}}
+	<button type="button" class="ui mini button" {{action 'postLlamaStream'}}>Llama Stream</button>
+</div>
