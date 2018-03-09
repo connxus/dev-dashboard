@@ -11,6 +11,7 @@ module.exports = function(environment) {
     rootURL: '/',
     locationType: 'auto',
     socketLocation: 'http://localhost:8080',
+    apiLocation: 'http://localhost:8080/api',
     moment: {
       // Options:
       // 'all' - all years, all timezones
@@ -59,7 +60,8 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.socketLocation = 'http://localhost:8080';
+    ENV.socketLocation = 'https://warm-escarpment-23667.herokuapp.com/';
+    ENV.apiLocation = 'https://warm-escarpment-23667.herokuapp.com/api';
   }
 
   return ENV;

@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import AjaxService from 'ember-ajax/services/ajax';
+import config from 'dev-dashboard/config/environment';
 
 export default AjaxService.extend({
-  host: 'https://warm-escarpment-23667.herokuapp.com/api'
+  host: config.apiLocation
 });

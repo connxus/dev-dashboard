@@ -1,5 +1,6 @@
 import DS from 'ember-data';
+import config from 'dev-dashboard/config/environment';
 
 export default DS.RESTAdapter.extend({
-  host: 'https://warm-escarpment-23667.herokuapp.com/api',
+  host: config.apiLocation
 });
