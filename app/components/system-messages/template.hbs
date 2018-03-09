@@ -1,8 +1,10 @@
 <h3>System Messages</h3>
-{{#if messages}}
-	<ul>
-		{{#each messages as |message|}}
-			<li>{{message}}</li>
-		{{/each}}
-	</ul>
-{{/if}}
+<div style="max-height:350px;overflow:auto;">
+	{{#if messages}}
+		<ul>
+			{{#each messages as |message|}}
+				<li>{{message}}</li>
+			{{/each}}
+		</ul>
+	{{/if}}
+</div>
