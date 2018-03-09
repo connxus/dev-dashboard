@@ -10,6 +10,11 @@ export default Ember.Component.extend({
     this.send('changeStream');
   },
 
+  willDestroy() {
+    const counter = this.get('counter');
+    clearInterval(counter);
+  },
+
   actions: {
     changeStream: function() {
       var self = this;
@@ -30,7 +35,7 @@ export default Ember.Component.extend({
 
       Ember.run.later(function() {
         self.send('changeStream');
-      }, 5000)
+      }, 20000);
     }
   }
 });

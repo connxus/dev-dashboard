@@ -124,3 +124,10 @@
   border: none;
   zoom: 0.25%;
 }
+
+.system-message {
+  grid-column: 4;
+  grid-row: 2;
+  height: 100%;
+  margin: 1em;
+}
