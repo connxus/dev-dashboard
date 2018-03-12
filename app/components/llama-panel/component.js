@@ -8,6 +8,8 @@ export default Ember.Component.extend({
   cycleTime: 30000,
   stream: 1,
   totalSteams: 3,
+
+  emberYoutube: null,
   ytid: null,
   ytFullscreen: false,
   ytVolume: 0,
@@ -31,6 +33,15 @@ export default Ember.Component.extend({
       }
     }, this.get('cycleTime'));
   },
+
+  fullScreen: Ember.observer('emberYoutube.playerState', 'ytFullscreen', function(){
+    var playerState = this.get('emberYoutube.playerState');
+    var ytFullscreen = this.get('ytFullscreen');
+
+    if (playerState !== 'loading' && ytFullscreen) {
+      this.send('ytFullscreen');
+    }
+  }) ,
 
   runCycle() {
     this.send('nextStream');
