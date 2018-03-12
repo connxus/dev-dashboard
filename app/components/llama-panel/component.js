@@ -109,7 +109,7 @@ export default Ember.Component.extend({
 
     ytFullscreen() {
       if (this.get('ytFullscreen')) {
-        Ember.$('#EmberYoutube-player').webkitRequestFullscreen();
+        Ember.$('#EmberYoutube-player')[0].webkitRequestFullscreen();
       }
     },
 
