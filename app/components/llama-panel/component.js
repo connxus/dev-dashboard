@@ -11,7 +11,6 @@ export default Ember.Component.extend({
 
   emberYoutube: null,
   ytid: null,
-  ytFullscreen: false,
   ytVolume: 0,
 
   myPlayerVars: {
@@ -33,20 +32,6 @@ export default Ember.Component.extend({
       }
     }, this.get('cycleTime'));
   },
-
-  fullScreen: Ember.observer('emberYoutube.playerState', 'ytFullscreen', function(){
-    var playerState = this.get('emberYoutube.playerState');
-    var ytFullscreen = this.get('ytFullscreen');
-
-    console.log('Player State', playerState);
-    console.log('Fullscreen', ytFullscreen);
-
-    if (playerState === 'playing' && ytFullscreen) {
-      Ember.run.later(this, function() {
-        this.send('ytFullscreen');
-      }, 1500);
-    }
-  }),
 
   runCycle() {
     this.send('nextStream');
@@ -75,16 +60,8 @@ export default Ember.Component.extend({
 
       if ( arg2 === 'stop') {
         this.send('ytEnded');
-      } else if ( arg2 === 'full' || arg2 === 'fullscreen') {
-        this.send('ytFullscreen');
       } else {
         this.send('getYoutubeId', arg2);
-
-        if (arg3 === 'full' || arg3 === 'fullscreen') {
-          this.set('ytFullscreen', true);
-        } else {
-          this.set('ytFullscreen', false);
-        }
 
         if (arg3 === 'sound') {
           this.set('ytVolume', 100);
@@ -114,13 +91,8 @@ export default Ember.Component.extend({
       }
     },
 
-    ytFullscreen() {
-      Ember.$('#EmberYoutube-player')[0].webkitRequestFullscreen();
-    },
-
     ytEnded() {
       this.set('ytid', null);
-      this.set('ytFullscreen', false);
     },
 
     toggleCycle() {
