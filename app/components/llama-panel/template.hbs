@@ -1,10 +1,9 @@
 <div class="container">
   {{#if ytid}}
-    {{ember-youtube style="height: 500px;" ytid=ytid playerVars=myPlayerVars}}
+    {{ember-youtube style="height: 500px;" ended='ytEnded' ytid=ytid playerVars=myPlayerVars}}
    {{else}}
     <div class="streams-list">
       <span class="stream-id">{{stream}}</span>
-
       <ul>
         <li class="{{if (eq stream 1) 'active'}}">
           <img class="stream" src="http://151.204.229.184:10202/nphMotionJpeg?Resolution=640x480&Quality=Standard">
