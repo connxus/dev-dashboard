@@ -1,6 +1,14 @@
 <div class="container">
   {{#if ytid}}
-    {{ember-youtube style="height: 500px;" playing='ytStarted' volume=ytVolume ended='ytEnded' ytid=ytid playerVars=myPlayerVars}}
+    {{ember-youtube style="height: 500px;"
+      playing='ytStarted' 
+      delegate=this
+      delegate-as="emberYoutube"
+      volume=ytVolume 
+      ended='ytEnded' 
+      ytid=ytid 
+      playerVars=myPlayerVars
+    }}
    {{else}}
     <div class="streams-list">
       <span class="stream-id">{{stream}}</span>
