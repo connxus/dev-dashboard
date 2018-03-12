@@ -75,10 +75,12 @@ export default Ember.Component.extend({
 
       if ( arg2 === 'stop') {
         this.send('ytEnded');
+      } else if ( arg2 === 'full' || arg2 === 'fullscreen') {
+        this.send('ytFullscreen');
       } else {
         this.send('getYoutubeId', arg2);
 
-        if (arg3 === 'full' || 'fullscreen') {
+        if (arg3 === 'full' || arg3 = 'fullscreen') {
           this.set('ytFullscreen', true);
         } else {
           this.set('ytFullscreen', false);
