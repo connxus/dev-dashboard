@@ -10,7 +10,7 @@ export default Ember.Component.extend({
   totalSteams: 3,
   ytid: null,
   ytFullscreen: false,
-  ytVolume: 100,
+  ytVolume: 0,
 
   myPlayerVars: {
     autoplay: 1,
@@ -61,16 +61,16 @@ export default Ember.Component.extend({
         this.send('ytEnded');
       } else {
 
-        if (arg3 === 'full' || 'fullscreen') {
+        if (arg2 === 'full' || 'fullscreen') {
           this.set('ytFullscreen', true);
         } else {
           this.set('ytFullscreen', false);
         }
 
-        if (arg3 === 'mute' || 'muted') {
-          this.set('ytVolume', 0);
-        } else {
+        if (arg3 === 'sound') {
           this.set('ytVolume', 100);
+        } else {
+          this.set('ytVolume', 0);
         }
 
         this.send('getYoutubeId', arg.split(" ")[1]);
@@ -96,7 +96,7 @@ export default Ember.Component.extend({
       }
     },
 
-    ytStart() {
+    ytFullscreen() {
       if (this.get('ytFullscreen')) {
         Ember.$('#EmberYoutube-player').webkitRequestFullscreen();
       }
