@@ -38,10 +38,13 @@ export default Ember.Component.extend({
     var playerState = this.get('emberYoutube.playerState');
     var ytFullscreen = this.get('ytFullscreen');
 
+    console.log('Player State', playerState);
+    console.log('Fullscreen', ytFullscreen);
+
     if (playerState === 'playing' && ytFullscreen) {
       this.send('ytFullscreen');
     }
-  }) ,
+  }),
 
   runCycle() {
     this.send('nextStream');
@@ -71,6 +74,7 @@ export default Ember.Component.extend({
       if ( arg2 === 'stop') {
         this.send('ytEnded');
       } else {
+        this.send('getYoutubeId', arg2);
 
         if (arg3 === 'full' || 'fullscreen') {
           this.set('ytFullscreen', true);
@@ -84,7 +88,6 @@ export default Ember.Component.extend({
           this.set('ytVolume', 0);
         }
 
-        this.send('getYoutubeId', arg.split(" ")[1]);
       }
 
       return;
