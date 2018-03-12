@@ -38,7 +38,7 @@ export default Ember.Component.extend({
     var playerState = this.get('emberYoutube.playerState');
     var ytFullscreen = this.get('ytFullscreen');
 
-    if (playerState !== 'loading' && ytFullscreen) {
+    if (playerState === 'playing' && ytFullscreen) {
       this.send('ytFullscreen');
     }
   }) ,
