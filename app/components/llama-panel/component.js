@@ -42,7 +42,9 @@ export default Ember.Component.extend({
     console.log('Fullscreen', ytFullscreen);
 
     if (playerState === 'playing' && ytFullscreen) {
-      this.send('ytFullscreen');
+      Ember.run.later(this, function() {
+        this.send('ytFullscreen');
+      }, 1500);
     }
   }),
 
@@ -111,9 +113,7 @@ export default Ember.Component.extend({
     },
 
     ytFullscreen() {
-      if (this.get('ytFullscreen')) {
-        Ember.$('#EmberYoutube-player')[0].webkitRequestFullscreen();
-      }
+      Ember.$('#EmberYoutube-player')[0].webkitRequestFullscreen();
     },
 
     ytEnded() {
