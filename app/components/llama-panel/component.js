@@ -53,6 +53,7 @@ export default Ember.Component.extend({
 
     if ( arg.split(" ")[0] === 'youtube' ) {
       this.send('getYoutubeId', arg.split(" ")[1]);
+      return;
     }
 
     this.set('stream', parseInt(arg));
