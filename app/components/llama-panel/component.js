@@ -61,13 +61,13 @@ export default Ember.Component.extend({
         this.send('ytEnded');
       } else {
 
-        if (arg3 === 'full') {
+        if (arg3 === 'full' || 'fullscreen') {
           this.set('ytFullscreen', true);
         } else {
           this.set('ytFullscreen', false);
         }
 
-        if (arg3 === 'mute') {
+        if (arg3 === 'mute' || 'muted') {
           this.set('ytVolume', 0);
         } else {
           this.set('ytVolume', 100);
@@ -98,7 +98,7 @@ export default Ember.Component.extend({
 
     ytStart() {
       if (this.get('ytFullscreen')) {
-        Ember.$('.ytp-fullscreen-button').trigger('click');
+        Ember.$('#EmberYoutube-player').webkitRequestFullscreen();
       }
     },
 
