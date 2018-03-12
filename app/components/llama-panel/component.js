@@ -72,7 +72,7 @@ export default Ember.Component.extend({
         } else {
           this.set('ytVolume', 100);
         }
-         
+
         this.send('getYoutubeId', arg.split(" ")[1]);
       }
 
@@ -98,9 +98,7 @@ export default Ember.Component.extend({
 
     ytStart() {
       if (this.get('ytFullscreen')) {
-        Ember.$('.ytp-fullscreen').click(()=>{
-          console.log('Video is full screen.')
-        });
+        Ember.$('.ytp-fullscreen-button').trigger('click');
       }
     },
 
