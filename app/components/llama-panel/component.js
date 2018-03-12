@@ -4,6 +4,8 @@ import config from 'dev-dashboard/config/environment';
 export default Ember.Component.extend({
 	socketIOService: Ember.inject.service('socket-io'),
 
+  cycle: true,
+  cycleTime: 30000,
   stream: 1,
   totalSteams: 3,
 
@@ -13,14 +15,43 @@ export default Ember.Component.extend({
 		const socket = this.get('socketIOService').socketFor(config.socketLocation);
     this.set('socket', socket);
 
-		socket.on('llama stream', this.onLlamaStream, this);
+    socket.on('llama stream', this.onLlamaStream, this);
+
+    Ember.run.later(this, function() {
+      if ( this.get('cycle') === true ) {
+        this.runCycle();
+      }
+    }, this.get('cycleTime'));
   },
 
-  onLlamaStream({ streamNumber }) {
-    this.set('stream', parseInt(streamNumber));
+  runCycle() {
+    this.send('nextStream');
+
+    Ember.run.later(this, function() {
+      if ( this.get('cycle') === true ) {
+        this.runCycle();
+      }
+    }, this.get('cycleTime'));
+  },
+
+  onLlamaStream({ arg }) {
+    if ( arg === 'cycle' ) {
+      this.set('cycle', true);
+      return;
+    }
+    if ( arg === 'freeze' ) {
+      this.set('cycle', false);
+      return;
+    }
+
+    this.set('stream', parseInt(arg));
   },
 
   actions: {
+
+    toggleCycle() {
+      this.toggleProperty('cycle');
+    },
 
     nextStream() {
       const stream = this.get('stream');

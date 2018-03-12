@@ -17,6 +17,20 @@ iframe {
 	padding: 0;
 }
 
+.streams-list > .stream-id {
+	display: inline-block;
+	color: #000;
+	background-color: rgba(255,255,255,0.4);
+	padding: 0.2em;
+	font-size: 2em;
+	border-radius: 1em;
+	font-weight: bold;
+	position: absolute;
+	bottom: 1em;
+	right: 1em;
+	z-index: 10;
+}
+
 .streams-list > ul {
 	list-style: none;
 	width: 100%;
