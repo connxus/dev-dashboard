@@ -72,7 +72,7 @@ export default Ember.Component.extend({
         this.send('ytEnded');
       } else {
 
-        if (arg2 === 'full' || 'fullscreen') {
+        if (arg3 === 'full' || 'fullscreen') {
           this.set('ytFullscreen', true);
         } else {
           this.set('ytFullscreen', false);
