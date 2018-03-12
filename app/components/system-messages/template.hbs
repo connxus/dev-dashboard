@@ -1,10 +1,6 @@
-<h3>System Messages</h3>
-<div style="max-height:350px;overflow:auto;">
-	{{#if messages}}
-		<ul>
-			{{#each messages as |message|}}
-				<li>{{message}}</li>
-			{{/each}}
-		</ul>
-	{{/if}}
-</div>
+{{#each messages as |message|}}
+	{{#ui-nag class="inline"}}
+		<span class="title">{{message}}</span>
+		<i class="close icon"></i>
+	{{/ui-nag}}
+{{/each}}

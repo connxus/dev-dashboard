@@ -2,7 +2,7 @@ import Ember from 'ember';
 import config from 'dev-dashboard/config/environment';
 
 export default Ember.Component.extend({
-	classNames: ['ui', 'segment'],
+	classNames: [],
 
 	ajax: Ember.inject.service(),
 	socketIOService: Ember.inject.service('socket-io'),
@@ -21,20 +21,10 @@ export default Ember.Component.extend({
 	onSystemMessage({ message }) {
 		if ( message ) {
 			this.get('messages').pushObject(message);
-		}
-	},
 
-	actions: {
-		postLlamaStream() {
-			const ajax = this.get('ajax');
-			const streamNumber = this.get('streamNumber');
-
-			ajax.request('/llamaStream', {
-				method: 'POST',
-				data: { streamNumber }
-			}).then(response => {
-				console.log('llamaStream response', response);
-			});
+			Ember.run.later(this, function() {
+				this.get('messages').removeObject( message );
+			}, 15000);
 		}
 	}
 });
