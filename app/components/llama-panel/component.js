@@ -30,10 +30,6 @@ export default Ember.Component.extend({
     }, this.get('cycleTime'));
   },
 
-  ytEnded() {
-    this.set('ytid', null);
-  },
-
   runCycle() {
     this.send('nextStream');
 
@@ -74,6 +70,10 @@ export default Ember.Component.extend({
           this.set('ytid', null);
           return 'error';
       }
+    },
+
+    ytEnded() {
+      this.set('ytid', null);
     },
 
     toggleCycle() {
