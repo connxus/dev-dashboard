@@ -52,7 +52,14 @@ export default Ember.Component.extend({
     }
 
     if ( arg.split(" ")[0] === 'youtube' ) {
-      this.send('getYoutubeId', arg.split(" ")[1]);
+      var arg2 = args.split(" ")[1];
+
+      if ( arg2 === 'stop') {
+        this.send('ytEnded');
+      } else {
+        this.send('getYoutubeId', arg.split(" ")[1]);
+      }
+
       return;
     }
 
