@@ -74,7 +74,7 @@ export default Ember.Component.extend({
           this.set('ytid', null);
           return 'error';
       }
-    }
+    },
 
     toggleCycle() {
       this.toggleProperty('cycle');
