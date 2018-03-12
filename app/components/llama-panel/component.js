@@ -37,6 +37,7 @@ export default Ember.Component.extend({
   onLlamaStream({ arg }) {
     if ( arg === 'cycle' ) {
       this.set('cycle', true);
+      this.runCycle.call(this);
       return;
     }
     if ( arg === 'freeze' ) {
