@@ -39,6 +39,7 @@
     "ember-source": "~2.15.0",
     "ember-truth-helpers": "^2.0.0",
     "ember-websockets": "^7.0.4",
+    "ember-youtube": "^0.8.2",
     "loader.js": "^4.2.3",
     "semantic-ui-ember": "^2.0.1"
   },

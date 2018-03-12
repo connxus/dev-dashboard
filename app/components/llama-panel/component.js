@@ -8,6 +8,12 @@ export default Ember.Component.extend({
   cycleTime: 30000,
   stream: 1,
   totalSteams: 3,
+  ytid: null,
+
+  myPlayerVars: {
+    autoplay: 1,
+    showinfo: 0
+  },
 
   didInsertElement: function() {
 		this._super(...arguments);
@@ -22,6 +28,10 @@ export default Ember.Component.extend({
         this.runCycle();
       }
     }, this.get('cycleTime'));
+  },
+
+  ytEnded() {
+    this.set('ytid', null);
   },
 
   runCycle() {
@@ -45,10 +55,26 @@ export default Ember.Component.extend({
       return;
     }
 
+    if ( arg.split(" ")[0] === 'youtube' ) {
+      this.send('getYoutubeId', arg.split(" ")[1]);
+    }
+
     this.set('stream', parseInt(arg));
   },
 
   actions: {
+
+    getYoutubeId(url) {
+      var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+      var match = url.match(regExp);
+  
+      if (match && match[2].length == 11) {
+          this.set('ytid', match[2]);
+      } else {
+          this.set('ytid', null);
+          return 'error';
+      }
+    }
 
     toggleCycle() {
       this.toggleProperty('cycle');
