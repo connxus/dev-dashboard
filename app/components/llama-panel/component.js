@@ -80,7 +80,7 @@ export default Ember.Component.extend({
       } else {
         this.send('getYoutubeId', arg2);
 
-        if (arg3 === 'full' || arg3 = 'fullscreen') {
+        if (arg3 === 'full' || arg3 === 'fullscreen') {
           this.set('ytFullscreen', true);
         } else {
           this.set('ytFullscreen', false);
