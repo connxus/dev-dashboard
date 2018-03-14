@@ -20,11 +20,21 @@ export default Ember.Component.extend({
     get(){
       var hour = this.get('clock.hour');
 
-      if (hour === 16) {
+      if (hour === 16 && this.get('didInsertElement')) {
+        this.send('playAudio');
         return true;
       } else {
         return false;
       }
     }
-  })
+  }),
+
+  actions: {
+    playAudio() {
+      setTimeout(() => {
+        var x = document.getElementById("smashAudio"); 
+        x.play();
+      },1000);
+    }
+  }
 });
