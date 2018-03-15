@@ -111,7 +111,7 @@ html, body {
 .forecast-item {
   text-align: center;
   display: grid;
-  padding: 1em;
+  padding: 1em 0;
 }
 .issues {
   grid-column: 1 / 5;
