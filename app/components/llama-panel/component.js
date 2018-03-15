@@ -12,6 +12,16 @@ export default Ember.Component.extend({
   emberYoutube: null,
   ytid: null,
   ytVolume: 0,
+  fullscreen: false,
+
+  ytStyle: 'height: 500px',
+  ytStyleObserver: Ember.observer('fullscreen', function(){
+    if(this.get('fullscreen')){
+      this.set('ytStyle', 'height: 100vh;') 
+    } else {
+      this.set('ytStyle', 'height: 500px;') 
+    }
+  }),
 
   myPlayerVars: {
     autoplay: 1,
@@ -60,15 +70,35 @@ export default Ember.Component.extend({
 
       if ( arg2 === 'stop') {
         this.send('ytEnded');
+      } else if ( arg2 === 'fullscreen' || arg2 === 'full' ) {
+        this.set('fullscreen', true);
+      } else if ( arg2 === 'minimize' || arg2 === 'mini' ) {
+        this.set('fullscreen', false);
+      } else if ( arg2 === 'sound' ) {
+        // TURN UP VOLUME
+        if (this.get('emberYoutube')) {
+          this.set('emberYoutube.volume', 100);
+        }
+        this.set('volume', 100);
+      } else if ( arg2 === 'mute') {
+        // MUTE AUDIO
+        if (this.get('emberYoutube')) {
+          this.set('emberYoutube.volume', 0);
+        }
+        this.set('volume', 0);
       } else {
-        this.send('getYoutubeId', arg2);
-
         if (arg3 === 'sound') {
           this.set('ytVolume', 100);
         } else {
           this.set('ytVolume', 0);
         }
+        if (arg3 === 'fullscreen' || arg3 === 'full') {
+          this.set('fullscreen', true);
+        } else {
+          this.set('fullscreen', false);
+        }
 
+        this.send('getYoutubeId', arg2);
       }
 
       return;
@@ -93,6 +123,7 @@ export default Ember.Component.extend({
 
     ytEnded() {
       this.set('ytid', null);
+      this.set('fullscreen', false);
     },
 
     toggleCycle() {

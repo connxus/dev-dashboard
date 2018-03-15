@@ -1,20 +1,33 @@
 <div class="weather-content ui segment">
   {{#if data}}
-    <div class="current-weather">
-        <div class="temp">{{data.current.temperature}} &#8457;</div>
+    <div class="temp">{{currentWeather.text}} - {{currentWeather.temp}} &#8457;</div>
+
+    <div class="left-weather">
+      <div class="current-weather">
         <br>
-        <div class="city">{{data.current.observationpoint}}</div>
+        <div class="city">{{currentWeather.obsPoint}}</div>
         <br>
-        <div class="wind">{{data.current.winddisplay}}</div>
+        <div class="wind">{{currentWeather.wind}}</div>
+      </div>
     </div>
 
+    <div class="right-weather">
+       <div class="current-condition">
+         {{weather-condition class="weather-condition" condition=currentWeather.condition}}
+       </div>
+     </div>
+
     <div class="forecast">
-      {{#each data.forecast as |for|}}
+      {{#each forecast as |for|}}
         <div class="forecast-item">
-          <div class="f-temp">{{for.high}} &#8457;</div>
-          <div class="f-day">{{for.shortday}}</div>
+          <div class="f-temp">{{for.temp}} &#8457;</div>
+            <div class="f-condition">
+              {{weather-condition condition=for.condition}}
+            </div>
+          <div class="f-day">{{for.day}}</div>
         </div>
       {{/each}}
     </div>
   {{/if}}
 </div>
+
