@@ -13,8 +13,10 @@ export default Ember.Component.extend({
     getAppData() {
       var self = this;
       return this.get('ajax').request('/cxs-app', {method: 'GET'}).then(function(response) {
-        self.set('data', response.data);
-        self.set('title', response.title);
+        if (response.data) {
+          self.set('data', response.data);
+          self.set('title', response.title);
+        }
         setTimeout(function() {
           self.send('getApiData');
         }, 30000);
@@ -23,8 +25,10 @@ export default Ember.Component.extend({
     getApiData() {
       var self = this;
       return this.get('ajax').request('/cxs-api', {method: 'GET'}).then(function(response) {
-        self.set('data', response.data);
-        self.set('title', response.title);
+        if (response.data) {
+          self.set('data', response.data);
+          self.set('title', response.title);
+        }
         setTimeout(function() {
           self.send('getAppData');
         }, 30000);
