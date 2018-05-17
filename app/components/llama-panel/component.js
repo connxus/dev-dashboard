@@ -13,6 +13,7 @@ export default Ember.Component.extend({
   ytid: null,
   ytVolume: 0,
   fullscreen: false,
+  ytLoaded: false,
 
   ytStyle: 'height: 500px',
   ytStyleObserver: Ember.observer('fullscreen', function(){
@@ -21,6 +22,14 @@ export default Ember.Component.extend({
     } else {
       this.set('ytStyle', 'height: 500px;') 
     }
+  }),
+
+  ytTimeObserver: Ember.observer('ytLoaded','time', function(){
+    let self = this
+      if(this.get('emberYoutube') && this.get('time') && this.get('ytLoaded')){
+        var emberYT = this.get('emberYoutube')
+        emberYT.send('seekTo', self.get('time'));
+      }
   }),
 
   myPlayerVars: {
@@ -111,7 +120,9 @@ export default Ember.Component.extend({
 
     getYoutubeId(url) {
       var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+      var time = /(t=|start=)(\d+)/;
       var match = url.match(regExp);
+      var timeMatch = url.match(time);
   
       if (match && match[2].length == 11) {
           this.set('ytid', match[2]);
@@ -119,11 +130,25 @@ export default Ember.Component.extend({
           this.set('ytid', null);
           return 'error';
       }
+      
+        if (timeMatch && timeMatch[2].length) {
+          this.set('time', timeMatch[2]);
+      } else {
+          this.set('time', null);
+          return 'error';
+      }
+    },
+
+    ytStarted(){
+      if(!this.get('ytLoaded')){
+        this.set('ytLoaded', true)
+      }
     },
 
     ytEnded() {
       this.set('ytid', null);
       this.set('fullscreen', false);
+      this.set('ytLoaded', false)
     },
 
     toggleCycle() {
