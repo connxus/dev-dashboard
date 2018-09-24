@@ -12,7 +12,7 @@ export default Ember.Component.extend({
   emberYoutube: null,
   ytid: null,
   ytVolume: 0,
-  fullscreen: false,
+  fullscreen: true,
   ytLoaded: false,
 
   ytStyle: 'height: 500px',
@@ -147,7 +147,7 @@ export default Ember.Component.extend({
 
     ytEnded() {
       this.set('ytid', null);
-      this.set('fullscreen', false);
+      // this.set('fullscreen', false);
       this.set('ytLoaded', false)
     },
 
