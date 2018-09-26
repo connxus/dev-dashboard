@@ -48,17 +48,6 @@ export default Ember.Component.extend({
         return minute
       }
     }
-  }),
-  second: Ember.computed('clock.second', {
-    get() {
-      var second = this.get('clock.second');
-
-      if (second < 10) {
-        return '0' + second
-      } else {
-        return second
-      }
-    }
-  }),
+  })
 
 });
