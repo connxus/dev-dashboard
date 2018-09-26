@@ -12,15 +12,15 @@ export default Ember.Component.extend({
   emberYoutube: null,
   ytid: null,
   ytVolume: 0,
-  fullscreen: true,
+  fullscreen: false,
   ytLoaded: false,
 
-  ytStyle: 'height: 100vh',
+  ytStyle: 'height: 500px',
   ytStyleObserver: Ember.observer('fullscreen', function(){
     if(this.get('fullscreen')){
       this.set('ytStyle', 'height: 100vh;') 
     } else {
-      // this.set('ytStyle', 'height: 500px;') 
+      this.set('ytStyle', 'height: 500px;') 
     }
   }),
 
@@ -80,9 +80,9 @@ export default Ember.Component.extend({
       if ( arg2 === 'stop') {
         this.send('ytEnded');
       } else if ( arg2 === 'fullscreen' || arg2 === 'full' ) {
-        // this.set('fullscreen', true);
+        this.set('fullscreen', true);
       } else if ( arg2 === 'minimize' || arg2 === 'mini' ) {
-        // this.set('fullscreen', false);
+        this.set('fullscreen', false);
       } else if ( arg2 === 'sound' ) {
         // TURN UP VOLUME
         if (this.get('emberYoutube')) {
@@ -102,9 +102,9 @@ export default Ember.Component.extend({
           this.set('ytVolume', 0);
         }
         if (arg3 === 'fullscreen' || arg3 === 'full') {
-          // this.set('fullscreen', true);
+          this.set('fullscreen', true);
         } else {
-          // this.set('fullscreen', false);
+          this.set('fullscreen', false);
         }
 
         this.send('getYoutubeId', arg2);
