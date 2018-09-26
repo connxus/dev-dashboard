@@ -7,7 +7,7 @@ export default Ember.Component.extend({
   cycle: true,
   cycleTime: 30000,
   stream: 1,
-  totalSteams: 4,
+  totalSteams: 2,
 
   emberYoutube: null,
   ytid: null,
