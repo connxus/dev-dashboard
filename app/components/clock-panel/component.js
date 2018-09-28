@@ -5,6 +5,8 @@ import moment from 'moment';
 export default Ember.Component.extend({
   namespace: '/',
 
+  amOrPm: 'AM',
+
   // didInsertElement() {
   //   this._super(...arguments);
   //
@@ -29,8 +31,10 @@ export default Ember.Component.extend({
       var hour = this.get('clock.hour');
 
       if (hour > 12) {
+        this.set('amOrPm', 'PM');
         return hour - 12;
       } else {
+        this.set('amOrPm', 'AM');
         if (hour === 0) {
           return 12;
         }
@@ -38,6 +42,7 @@ export default Ember.Component.extend({
       }
     }
   }),
+  
   minute: Ember.computed('clock.minute', {
     get() {
       var minute = this.get('clock.minute');
