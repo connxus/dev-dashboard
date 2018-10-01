@@ -29,12 +29,18 @@ export default Ember.Component.extend({
   hour: Ember.computed('clock.hour', {
     get(){
       var hour = this.get('clock.hour');
+      
+      this.set('date', moment().format('dddd, MMMM Do YYYY'));
 
-      if (hour > 12) {
-        this.set('amOrPm', 'PM');
-        return hour - 12;
+      if (hour >= 12) {
+        this.set('amOrPm', 'PM');        
       } else {
         this.set('amOrPm', 'AM');
+      }
+
+      if (hour > 12) {
+        return hour - 12;
+      } else {
         if (hour === 0) {
           return 12;
         }
