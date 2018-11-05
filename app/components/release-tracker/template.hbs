@@ -1,0 +1,15 @@
+<div class="releases">
+  <div class=" ui segment">
+    <h1>{{title}}</h1>
+  </div>
+  {{#if data}}
+    <div class="releases-grid">
+      {{#each data as |issue|}}
+        <div class="release-panel ui segment">
+          <h1 class="board-title">{{issue.name}}</h1>
+          <h1 class="count">{{issue.issueLength}}</h1>
+        </div>
+      {{/each}}
+    </div>
+  {{/if}}
+</div>
