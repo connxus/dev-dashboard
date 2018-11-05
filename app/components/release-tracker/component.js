@@ -6,18 +6,31 @@ export default Ember.Component.extend({
   ajax: Ember.inject.service(),
 
   didInsertElement(){
-    this.send('getAppData');
+    this.send('getAppReleaseData');
   },
 
   actions: {
-    getAppData() {
-      var self = this;
-      return this.get('ajax').request('/cxs-app', {method: 'GET'}).then(function(response) {
+    getAppReleaseData() {
+        var self = this;
+        return this.get('ajax').request('/cxs-app', {method: 'GET'}).then(function(response) {
         if (response.data) {
-          self.set('data', response.data);
-          self.set('title', response.title);
+            self.set('release-due-date', response.title);
         }
-      });
+        setTimeout(function() {
+            self.send('getApiReleaseData');
+            }, 30000);
+        });
+    },
+    getApiReleaseData() {
+        var self = this;
+        return this.get('ajax').request('/cxs-app', {method: 'GET'}).then(function(response) {
+            if (response.data) {
+            self.set('release-due-date', response.title);
+            }
+            setTimeout(function() {
+                self.send('getAppReleaseData');
+            }, 30000);
+        });
     }
   }
 });

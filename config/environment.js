@@ -62,6 +62,8 @@ module.exports = function(environment) {
   if (environment === 'production') {
     ENV.socketLocation = 'https://warm-escarpment-23667.herokuapp.com/';
     ENV.apiLocation = 'https://warm-escarpment-23667.herokuapp.com/api';
+    ENV.zenhubApi = process.env.zenhubApi;
+    ENV.zenhubToken = process.env.ZENHUB;
   }
 
   return ENV;
