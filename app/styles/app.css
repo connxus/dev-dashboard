@@ -21,15 +21,6 @@ html, body {
   height: 100%;
   margin: 1em;
 }
-.smash {
-  grid-column: 3/5;
-  grid-row: 2;
-  height: 100%;
-  margin: 1em;
-}
-.smash-logo {
-  width: 100%;
-}
 .clock-content {
   height: 100%;
   width: 100%;
@@ -167,4 +158,55 @@ html, body {
 	position: fixed;
 	margin: -1em;
 	z-index: 2;
+}
+
+.releases {
+  grid-column: 3 / 5;
+  grid-row: 2;
+  height: 90%;
+  margin: 0.5em 1em;
+}
+
+.releases-grid {
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  opacity: 0.5;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+}
+
+.release-panel {
+  width: 90%;
+  height: 80%;
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  margin-top: 1em !important;
+}
+
+.release-title {
+  grid-row: 1;
+  width: 100%;
+  grid-column: 3 / 5;
+  text-align: center;
+}
+
+.release-data {
+  font-size: 4em;
+  vertical-align: text-top;
+}
+
+.release-number {
+  grid-row: 1;
+  vertical-align: top;
+}
+
+.days-left {
+  grid-row: 3;
+  vertical-align: top;
+}
+
+.days-left-data {
+  font-size: 5em;
 }
