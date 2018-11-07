@@ -1,13 +1,14 @@
 <div class="releases">
-  <div class=" ui segment">
+  <div class="animated fadeIn release-title ui segment">
     <h1>{{title}}</h1>
   </div>
   {{#if data}}
-    <div class="releases-grid">
-      {{#each data as |issue|}}
+    <div class="animated fadeIn releases-grid">
+      {{#each data as |release|}}
         <div class="release-panel ui segment">
-          <h1 class="board-title">{{issue.name}}</h1>
-          <h1 class="count">{{issue.issueLength}}</h1>
+          <h1 class="release-data release-number">{{release.release-title}}</h1>
+          <h1 class="release-data days-left-data">{{release.daysLeft}}</h1>
+          <h2 class="release-text days-left">days left</h2>
         </div>
       {{/each}}
     </div>
