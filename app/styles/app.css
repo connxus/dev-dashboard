@@ -173,7 +173,7 @@ html, body {
   width: 100%;
   opacity: 0.5;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(1, 1fr);
 }
 
@@ -186,27 +186,30 @@ html, body {
 }
 
 .release-title {
-  grid-row: 1;
   width: 100%;
-  grid-column: 3 / 5;
+  grid-row: 1;
+  grid-column: 1;
   text-align: center;
 }
 
 .release-data {
-  font-size: 4em;
+  font-size: 2em;
   vertical-align: text-top;
 }
 
-.release-number {
+.release-title {
+  font-size: 2.4em;
   grid-row: 1;
   vertical-align: top;
 }
 
-.days-left {
-  grid-row: 3;
+.days-left-data {
+  grid-row: 2;
   vertical-align: top;
 }
 
-.days-left-data {
-  font-size: 5em;
+.release-deadline {
+  grid-row: 3;
+  font-size: 1em;
+  vertical-align: top;
 }
