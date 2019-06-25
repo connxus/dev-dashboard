@@ -15,6 +15,17 @@ export default Ember.Component.extend({
   fullscreen: false,
   ytLoaded: false,
 
+  twitchChannel: '',
+
+  twitchStyle: 'height: 72vh',
+  twitchStyleObserver: Ember.observer('fullscreen', function(){
+    if(this.get('fullscreen')){
+      this.set('twitchStyle', 'height: 100vh;') 
+    } else {
+      this.set('twitchStyle', 'height: 72vh') 
+    }
+  }),
+
   ytStyle: 'height: 500px',
   ytStyleObserver: Ember.observer('fullscreen', function(){
     if(this.get('fullscreen')){
@@ -73,6 +84,22 @@ export default Ember.Component.extend({
       return;
     }
 
+    if (arg.split(" ")[0] === 'stop') {
+      this.set('twitchChannel', arg2);   
+      this.send('ytEnded');
+      return
+    }
+
+    if (arg.split(" ")[0] === 'fullscreen') {
+      this.set('fullscreen', true);
+      return
+    }
+
+    if (arg.split(" ")[0] === 'mini') {
+      this.set('fullscreen', false);
+      return
+    }
+
     if ( arg.split(" ")[0] === 'youtube' ) {
       var arg2 = arg.split(" ")[1];
       var arg3 = arg.split(" ")[2];
@@ -111,6 +138,23 @@ export default Ember.Component.extend({
       }
 
       return;
+    }
+
+    if (arg.split(" ")[0] === 'twitch' ) {
+      var arg2 = arg.split(" ")[1];
+      var arg3 = arg.split(" ")[2];
+
+      this.set('twitchChannel', arg2);
+      
+      if (arg3 === 'fullscreen' || arg3 === 'full') {
+        this.set('fullscreen', true);
+      } else if ( arg2 === 'minimize' || arg2 === 'mini' ) {
+        this.set('fullscreen', false);
+      } else {
+        this.set('fullscreen', false);
+      }
+
+      return
     }
 
     this.set('stream', parseInt(arg));
