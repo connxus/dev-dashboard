@@ -17,12 +17,12 @@ export default Ember.Component.extend({
 
   twitchChannel: '',
 
-  twitchStyle: 'height: 72vh',
+  twitchStyle: 'height: 500px',
   twitchStyleObserver: Ember.observer('fullscreen', function(){
     if(this.get('fullscreen')){
       this.set('twitchStyle', 'height: 100vh;') 
     } else {
-      this.set('twitchStyle', 'height: 72vh') 
+      this.set('twitchStyle', 'height: 500px') 
     }
   }),
 
