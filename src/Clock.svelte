@@ -94,7 +94,7 @@
   <svg class="analog-clock" viewBox="-50 -50 100 100">
 
     <!-- markers -->
-    {#each [0,5,10,15,20,25,30,35,40,45,50,55] as minuteMarks}
+    {#each [0,15,30,45] as minuteMarks}
       <line
         class="major-mark"
         y1="30"
