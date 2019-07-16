@@ -1,43 +1,11 @@
-<script>
-  import Box from './Box.svelte';
-  import { onMount } from 'svelte';
-
-  const identifier = 'clock';
-
-  let time = new Date();
-
-  let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
-  // computed time segments updated when `date` changes
-  $: hours = time.getHours();
-  $: minutes = time.getMinutes();
-  $: seconds = time.getSeconds();
-
-  $: dayOfWeek = days[time.getDay()];
-  $: month = months[time.getMonth()];
-  $: date = time.getDate();
-  $: year = time.getFullYear();
-
-  onMount(() => {
-    const interval = setInterval(() => {
-      time = new Date();
-    }, 1000);
-
-    return () => {
-      clearInterval(interval);
-    };
-  });
-</script>
-
 <style>
   .analog-clock {
     position: absolute;
     bottom: 0;
     left: 50%;
     z-index: 0;
-    height: 100px;
-    width: 100px;
+    height: 90px;
+    width: 90px;
     transform: translate(-50%);
   }
 
@@ -55,6 +23,7 @@
 
   .digital-time-output {
     position: relative;
+    align-self: center;
     z-index: 2;
   }
 
@@ -71,10 +40,42 @@
 
   .date-output {
     display: block;
-    font-size: 1em;
+    font-size: 1.3em;
     text-align: center;
   }
 </style>
+
+<script>
+  import { onMount } from 'svelte';
+  import Box from './Box.svelte';
+
+  const identifier = 'clock';
+
+  let time = new Date();
+
+  let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+  // computed time segments updated when `date` changes
+  $: hours = time.getHours();
+  $: minutes = time.getMinutes();
+  $: seconds = time.getSeconds();
+
+  $: day = days[time.getDay()];
+  $: month = months[time.getMonth()];
+  $: date = time.getDate();
+  $: year = time.getFullYear();
+
+  onMount(() => {
+    const interval = setInterval(() => {
+      time = new Date();
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  });
+</script>
 
 <Box {identifier}>
   <div class="digital-time-output">
@@ -83,7 +84,7 @@
       <span class="period">{hours > 12 ? 'PM' : 'AM'}</span>
     </div>
     <div class="date-output">
-      <span class="dayOfWeek">{dayOfWeek}</span>,
+      <span class="day">{day}</span>,
       <span class="month">{month}</span>
       <span class="date">{date}</span>
       <span class="year">{year}</span>

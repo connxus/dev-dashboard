@@ -62,6 +62,18 @@ button:focus {
 	border-color: #666;
 }
 
+h1, h2, h3, h4, h5, h6 {
+	font-weight: normal;
+	margin: 0;
+	padding: 0;
+}
+
+/* Helper Classes
+	************************** */
+.txt-center, .text-center {
+	text-align: center;
+}
+
 /* Main Application Layout
 	************************** */
 
@@ -78,4 +90,11 @@ section#clock {
 	grid-column-end: auto;
 	grid-row-start: 2;
 	grid-row-end: 3;
+}
+
+section#weather {
+	grid-column-start: 4;
+	grid-column-end: auto;
+	grid-row-start: 1;
+	grid-row-end: 2;
 }

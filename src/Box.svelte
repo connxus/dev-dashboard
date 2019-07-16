@@ -1,7 +1,3 @@
-<script>
-  export let identifier
-</script>
-
 <style>
   .layout-box {
     position: relative;
@@ -10,6 +6,10 @@
     padding: 1em;
   }
 </style>
+
+<script>
+  export let identifier
+</script>
 
 <section class="layout-box" id={identifier}>
   <slot></slot>
