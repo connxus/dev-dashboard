@@ -33,6 +33,9 @@
     'tornado': 'poo-storm'
   };
 
+  /**
+   * Retrieves the weather details from the server
+   * */
   function fetchWeather() {
     return fetch(`${config.apiLocation}/weather`)
       .then(res => {
@@ -40,12 +43,23 @@
       });
   }
 
-  onMount(() => {
+  /**
+   * Calls fetchWeather. Called after the component has mounted itself to the DOM.
+   * */
+  function postMount() {
     fetchWeather().then(response => {
       weather = response.currently;
       weatherIcon = weatherIcons[weather.icon] || 'fa-sun';
-      console.log(weather);
     });
+  }
+
+  /**
+   * Svelte JS Lifecycle hook to trigger function once component is mounted to the DOM.
+   * */
+  onMount(() => {
+    postMount();
+    // request again in 30 minutes
+    setTimeout(postMount, 1000 * 60 * 30);
   });
 </script>
 
