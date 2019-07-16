@@ -1,15 +1,11 @@
 <style>
   .analog-clock {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    z-index: 0;
-    height: 90px;
-    width: 90px;
-    transform: translate(-50%);
+    float: right;
+    height: 150px;
+    width: 150px;
   }
 
-  .hour-hand, .major-mark {
+  .hour-hand {
     stroke: #CCC;
   }
 
@@ -18,19 +14,24 @@
   }
 
   .major-mark {
+    stroke: #555;
     stroke-width: 1;
   }
 
+  .major-mark-0,
+  .major-mark-15,
+  .major-mark-30,
+  .major-mark-45 {
+    stroke: #CCC;
+  }
+
   .digital-time-output {
-    position: relative;
-    align-self: center;
     z-index: 2;
   }
 
   .time-output {
     display: block;
     font-size: 4em;
-    text-align: center;
   }
 
   .time-output span {
@@ -41,7 +42,6 @@
   .date-output {
     display: block;
     font-size: 1.3em;
-    text-align: center;
   }
 </style>
 
@@ -78,25 +78,12 @@
 </script>
 
 <Box {identifier}>
-  <div class="digital-time-output">
-    <div class="time-output">
-      <span class="hour">{hours > 12 ? hours-12 : hours}</span>:<span class="minute">{minutes >= 10 ? minutes : `0${minutes}`}</span>
-      <span class="period">{hours > 12 ? 'PM' : 'AM'}</span>
-    </div>
-    <div class="date-output">
-      <span class="day">{day}</span>,
-      <span class="month">{month}</span>
-      <span class="date">{date}</span>
-      <span class="year">{year}</span>
-    </div>
-  </div>
-
   <svg class="analog-clock" viewBox="-50 -50 100 100">
 
     <!-- markers -->
-    {#each [0,15,30,45] as minuteMarks}
+    {#each [0,5,10,15,20,25,30,35,40,45,50,55] as minuteMarks}
       <line
-        class="major-mark"
+        class="major-mark major-mark-{minuteMarks}"
         y1="30"
         y2="35"
         transform="rotate({30 * minuteMarks})"
@@ -120,4 +107,17 @@
     />
 
   </svg>
+
+  <div class="digital-time-output">
+    <div class="time-output">
+      <span class="hour">{hours > 12 ? hours-12 : hours}</span>:<span class="minute">{minutes >= 10 ? minutes : `0${minutes}`}</span>
+      <span class="period">{hours > 12 ? 'PM' : 'AM'}</span>
+    </div>
+    <div class="date-output">
+      <span class="day">{day}</span>,
+      <span class="month">{month}</span>
+      <span class="date">{date}</span>
+      <span class="year">{year}</span>
+    </div>
+  </div>
 </Box>

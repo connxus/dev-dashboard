@@ -90,6 +90,7 @@ section#clock {
 	grid-column-end: auto;
 	grid-row-start: 2;
 	grid-row-end: 3;
+	align-self: center;
 }
 
 section#weather {
