@@ -1,9 +1,0 @@
-{
-  "name": "dev-dashboard",
-  "dependencies": {
-    "semantic-ui": "^2.2.13"
-  },
-  "devDependencies": {
-    "moment": "^2.22.2"
-  }
-}

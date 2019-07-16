@@ -1,50 +1,68 @@
-# dev-dashboard
+*Psst — looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+---
 
-## Prerequisites
+# svelte app
 
-You will need the following things properly installed on your computer.
+This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
 
-* [Git](https://git-scm.com/)
-* [Node.js](https://nodejs.org/) (with NPM)
-* [Ember CLI](https://ember-cli.com/)
-* [Google Chrome](https://google.com/chrome/)
+To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
 
-## Installation
+```bash
+npx degit sveltejs/template svelte-app
+cd svelte-app
+```
 
-* `git clone <repository-url>` this repository
-* `cd dev-dashboard`
-* `npm install`
+*Note that you will need to have [Node.js](https://nodejs.org) installed.*
 
-## Running / Development
 
-* `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
+## Get started
 
-### Code Generators
+Install the dependencies...
 
-Make use of the many generators for code, try `ember help generate` for more details
+```bash
+cd svelte-app
+npm install
+```
 
-### Running Tests
+...then start [Rollup](https://rollupjs.org):
 
-* `ember test`
-* `ember test --server`
+```bash
+npm run dev
+```
 
-### Building
+Navigate to [localhost:5000](http://localhost:5000). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
 
-* `ember build` (development)
-* `ember build --environment production` (production)
 
-### Deploying
+## Deploying to the web
 
-Specify what it takes to deploy your app.
+### With [now](https://zeit.co/now)
 
-## Further Reading / Useful Links
+Install `now` if you haven't already:
 
-* [ember.js](https://emberjs.com/)
-* [ember-cli](https://ember-cli.com/)
-* Development Browser Extensions
-  * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
-  * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
+```bash
+npm install -g now
+```
+
+Then, from within your project folder:
+
+```bash
+now
+```
+
+As an alternative, use the [Now desktop client](https://zeit.co/download) and simply drag the unzipped project folder to the taskbar icon.
+
+### With [surge](https://surge.sh/)
+
+Install `surge` if you haven't already:
+
+```bash
+npm install -g surge
+```
+
+Then, from within your project folder:
+
+```bash
+npm run build
+surge public
+```
