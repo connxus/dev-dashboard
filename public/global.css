@@ -97,4 +97,5 @@ section#weather {
 	grid-column-end: auto;
 	grid-row-start: 1;
 	grid-row-end: 2;
+	align-self: center;
 }
