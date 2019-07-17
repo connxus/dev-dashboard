@@ -68,8 +68,12 @@ router.get('/releases', async function(req, res) {
 
     let settingUp = new Promise((resolve, reject) => {
       filteredReleases.map((release, index, array) => {
+        let todaysDate = new Date();
+        let desiredEndDate = new Date(release.desired_end_date);
+
         release.appIssueCount = 0;
-        release.apiIssueCount = 0; 
+        release.apiIssueCount = 0;
+        release.daysLeft = Math.round((desiredEndDate.getTime()-todaysDate.getTime())/(1000*60*60*24));
         zenHubApi.getReleaseReportIssues({release_id: release.release_id}).then(data => {
           release.apiIssueCount = data.filter((releaseIssue) => {
             if (releaseIssue.repo_id === zenhubApiRepoId) {
