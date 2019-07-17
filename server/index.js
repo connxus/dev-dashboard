@@ -1,4 +1,4 @@
-const ZenHub = require('node-zenhub');
+const ZenHub = require('zenhub-api');
 const DarkSky = require('dark-sky');
 
 const env = require('dotenv').config();
@@ -14,6 +14,9 @@ const port = process.env.PORT || 8080;
 
 const router = express.Router();
 
+const zenhubApiRepoId = 26181661;
+const zenhubAppRepoId = 26181696;
+
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
@@ -24,19 +27,78 @@ router.get('/', function(req, res) {
   res.json({ message: 'API Successful'});
 });
 
+router.get('/chart', function(req, res) {
+  var callback = function (error, data) {
+    console.log('error:', error);
+    console.log('data:', data);
+    res.json({
+      title: 'Chart',
+      data: data ? data : error
+    });
+  }
+
+  zenHubApi.boards.getBoard(26181696 ,callback)
+});
+
 router.get('/cxs-app', function(req, res) {
-  res.json({
-    title: 'Application Repo',
-    data: data
+  zenHubApi.getBoard({repo_id: 26181696}).then((data)=>{
+    res.json({
+      title: 'APP Repo',
+      data: data
+    });
   });
 });
 
 router.get('/cxs-api', function(req, res) {
-  res.json({
-    title: 'API Repo',
-    data: data
+  zenHubApi.getBoard({repo_id: 26181661}).then((data)=>{
+    res.json({
+      title: 'API Repo',
+      data: data
+    });
   });
 });
+
+router.get('/releases', async function(req, res) {
+  zenHubApi.getReleaseReportsForRepo({repo_id: 26181661}).then((data)=>{
+    let filteredReleases = data.filter((release) => {
+      if (release.state === 'open') {
+        return release;
+      }
+    });
+
+    let settingUp = new Promise((resolve, reject) => {
+      filteredReleases.map((release, index, array) => {
+        release.appIssueCount = 0;
+        release.apiIssueCount = 0; 
+        zenHubApi.getReleaseReportIssues({release_id: release.release_id}).then(data => {
+          release.apiIssueCount = data.filter((releaseIssue) => {
+            if (releaseIssue.repo_id === zenhubApiRepoId) {
+              return releaseIssue;
+            }
+          }).length
+
+          release.appIssueCount = data.filter((releaseIssue) => {
+            if (releaseIssue.repo_id === zenhubAppRepoId) {
+              return releaseIssue;
+            }
+          }).length
+
+          if (index === array.length -1) resolve();
+        });
+      });
+    });
+
+    settingUp.then(() => {
+      console.log(filteredReleases);
+      
+      res.json({
+        title: 'Releases',
+        data: filteredReleases
+      });
+    });
+  });
+});
+
 
 router.get('/weather', function(req, res) {
   darksky
