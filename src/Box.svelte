@@ -8,7 +8,7 @@
 </style>
 
 <script>
-  export let identifier
+  export let identifier = 'box';
 </script>
 
 <section class="layout-box" id={identifier}>

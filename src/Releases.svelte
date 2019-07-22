@@ -1,5 +1,4 @@
 <style>
-.releases-content {text-align: center}
 .release-desc {
   width: 250px;
   white-space: nowrap;
@@ -22,9 +21,9 @@
   import Box from './Box.svelte';
   import config from './config.js';
 
-  const identifier = 'releases';
-
   let releases = [];
+
+  const identifier = 'releases';
 
   /**
    * Retrieves the release details from the server
@@ -55,9 +54,9 @@
   });
 </script>
 
-{#each releases as release}
-  <Box {identifier}>
-    <section class="releases-content">
+<section id={identifier}>
+  {#each releases as release}
+  <Box>
       <h2>{release.title}</h2>
       <center>
         <p class="release-desc">{release.description}</p>
@@ -77,6 +76,6 @@
           <p>Due Today</p>
         {/if}
       </center>
-    </section>
-  </Box>
-{/each}
+    </Box>
+  {/each}
+</section>

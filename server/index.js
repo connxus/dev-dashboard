@@ -1,3 +1,4 @@
+const config = require('./config.js');
 const ZenHub = require('zenhub-api');
 const DarkSky = require('dark-sky');
 

@@ -100,3 +100,21 @@ section#weather {
 	grid-row-end: 2;
 	align-self: center;
 }
+
+section#releases {
+	display: flex;
+	flex-direction: row;
+
+	grid-column-start: 1;
+	grid-column-end: 5;
+	grid-row-start: 3;
+	grid-row-end: 5;
+	align-self: center;
+}
+
+section#releases .layout-box {
+  text-align: center;
+  margin: 0.5em;
+  order: 0;
+  flex: 1 100%;
+}
