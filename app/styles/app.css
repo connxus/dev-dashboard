@@ -245,3 +245,8 @@ html, body {
   padding: 1em;
   grid-column: 2 / 3;    
 }
+
+#twitch-embed {
+  height: 100%;
+  width: auto;
+}
