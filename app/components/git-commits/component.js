@@ -16,17 +16,22 @@ export default Ember.Component.extend({
   },
 
   onGitCommit({arg}) {
-    const users = this.get('users');
+    if (arg.body) {
+      const users = this.get('users');
 
-    this.set('loading', true);
+      this.set('loading', true);
 
-    if (users.length > 5) {
-      users.splice(-1,1);
-    }
+      users.push(arg.body)
+  
+      if (users.length > 5) {
+        users.splice(-1,1);
+      }
+  
+      Ember.run.next(() => {
+        this.set('loading', false);
+        this.set('users', users);
+      })
+     }
+  }
 
-    Ember.run.next(() => {
-      this.set('loading', false);
-      this.set('users', users);
-    })
-  },
 });
