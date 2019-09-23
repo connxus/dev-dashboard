@@ -246,6 +246,10 @@ html, body {
   grid-column: 2 / 3;    
 }
 
+.twitch-comp {
+  height: 100%;
+}
+
 #twitch-embed {
   height: 100%;
   width: auto;

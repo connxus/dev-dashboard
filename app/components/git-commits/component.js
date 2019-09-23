@@ -12,16 +12,16 @@ export default Ember.Component.extend({
 		const socket = this.get('socketIOService').socketFor(config.socketLocation);
     this.set('socket', socket);
 
-    // socket.on('git commit', this.onGitCommit, this);
+    socket.on('git commit', this.onGitCommit, this);
   },
 
   onGitCommit({arg}) {
-    if (arg.body) {
+    if (arg) {
       const users = this.get('users');
 
       this.set('loading', true);
 
-      users.push(arg.body)
+      users.push(arg)
   
       if (users.length > 5) {
         users.splice(-1,1);
