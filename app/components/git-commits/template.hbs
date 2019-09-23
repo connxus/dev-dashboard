@@ -1,0 +1,10 @@
+<div class="weather-content ui segment">
+  {{#unless loading}}
+    <div class="user-section">
+      {{#each users as |user|}}
+        <img class="user-image" src="{{user.sender.avatar_url}}" />
+        <span class="user-message">{{user.head_commit.message}}</span>
+      {{/each}}
+    </div>
+  {{/unless}}
+</div>
